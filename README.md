@@ -1,4 +1,4 @@
-# N-body_simulation
+# N-body Simulation
 
 ## Python Scripts for Golden Output Generation
 - random_frame0_gen.py: to generate N particles with random parameters(pos, vel, mass) and store in txt file.
@@ -10,5 +10,8 @@
 ## Verilog Code for N-body Simulation
 - src/pe_core.v: processing element core module
 - src/lut.v : look-up table module for inverse square root calculation
+
+## Testbench
+- test/pe_core_tb.v: testbench for pe_core.v
 
 
