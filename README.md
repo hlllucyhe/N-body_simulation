@@ -10,6 +10,9 @@
 ## Verilog Code for N-body Simulation
 - src/pe_core.v: processing element core module
 - src/lut.v : look-up table module for inverse square root calculation
+- src/fifo.v: Input/Output FIFO (stream interface)
+- src/in_buffer.v: Particle data buffer (3N × 16-bit)
+- src/out_buffer.v: Accumulation result buffer (2N × 16-bit)
 
 ## Testbench
 - test/pe_core_tb.v: testbench for pe_core.v
