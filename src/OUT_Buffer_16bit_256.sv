@@ -11,7 +11,7 @@ module OUT_BUFFER #(
     // random write side (from compute core)
     input  logic        WR_EN,
     input  logic [IDX_BITS-1:0] WR_IDX,
-    input  logic [15:0] ACC_X, ACC_Y,
+    input  logic [15:0] FORCE_X, FORCE_Y,
 
     // stream output side
     output logic [15:0] DATA_OUT,
@@ -21,15 +21,15 @@ module OUT_BUFFER #(
     output logic DONE              // level-high when one full frame is sent
 );
 
-logic [15:0] acc_X [N-1:0];
-logic [15:0] acc_Y [N-1:0];
+    logic [15:0] force_X [N-1:0];
+    logic [15:0] force_Y [N-1:0];
 
 always_ff @(posedge CLK_IN) begin
     if (!RESET_IN) begin
     end 
     else if(WR_EN) begin
-        acc_X[WR_IDX] <= ACC_X;
-        acc_Y[WR_IDX] <= ACC_Y;
+        force_X[WR_IDX] <= FORCE_X;
+        force_Y[WR_IDX] <= FORCE_Y;
     end
 end
         
@@ -43,7 +43,7 @@ assign DONE = done_flag;
 
 always_comb begin
     if (!FRAME_VALID || done_flag) DATA_OUT = 16'h0;
-    else DATA_OUT = (rd_phase == 1'b0)? acc_X[rd_idx] : acc_Y[rd_idx];
+    else DATA_OUT = (rd_phase == 1'b0)? force_X[rd_idx] : force_Y[rd_idx];
 end
 
 wire fire = D_VALID && D_READY;
