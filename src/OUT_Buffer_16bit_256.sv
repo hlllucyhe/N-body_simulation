@@ -54,7 +54,7 @@ always_ff @( posedge CLK_IN ) begin
         rd_phase <= 1'b0;
         done_flag <= 1'b0;
     end
-    else if (CLEAR) begin
+    else if (CLEAR || !frame_valid) begin
         rd_idx <= 0;
         rd_phase <= 1'b0;
         done_flag <= 1'b0;
